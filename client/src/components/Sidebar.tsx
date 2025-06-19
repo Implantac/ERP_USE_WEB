@@ -7,7 +7,11 @@ import {
   DollarSign, 
   FileText, 
   UserCog, 
-  Settings 
+  Settings,
+  Calculator,
+  Factory,
+  Building,
+  Receipt
 } from "lucide-react";
 // Logo will be loaded directly via public path
 
@@ -39,6 +43,26 @@ const navigationItems = [
         title: "Financeiro",
         href: "/financial",
         icon: DollarSign,
+      },
+      {
+        title: "POS - Ponto de Venda",
+        href: "/pos",
+        icon: Calculator,
+      },
+      {
+        title: "Produção",
+        href: "/production",
+        icon: Factory,
+      },
+      {
+        title: "Ativos Fixos",
+        href: "/assets",
+        icon: Building,
+      },
+      {
+        title: "Fiscal & NFe",
+        href: "/fiscal",
+        icon: Receipt,
       },
       {
         title: "Relatórios",

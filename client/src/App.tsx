@@ -10,6 +10,10 @@ import CRM from "@/pages/CRM";
 import Products from "@/pages/Products";
 import Sales from "@/pages/Sales";
 import Financial from "@/pages/Financial";
+import POS from "@/pages/POS";
+import Production from "@/pages/Production";
+import Assets from "@/pages/Assets";
+import Fiscal from "@/pages/Fiscal";
 import Reports from "@/pages/Reports";
 import Users from "@/pages/Users";
 import NotFound from "@/pages/not-found";
@@ -23,6 +27,10 @@ function Router() {
         <Route path="/products" component={Products} />
         <Route path="/sales" component={Sales} />
         <Route path="/financial" component={Financial} />
+        <Route path="/pos" component={POS} />
+        <Route path="/production" component={Production} />
+        <Route path="/assets" component={Assets} />
+        <Route path="/fiscal" component={Fiscal} />
         <Route path="/reports" component={Reports} />
         <Route path="/users" component={Users} />
         <Route component={NotFound} />
