@@ -1,4 +1,5 @@
 import { pgTable, text, serial, integer, boolean, decimal, timestamp, varchar } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -117,6 +118,55 @@ export const insertFinancialTransactionSchema = createInsertSchema(financialTran
 });
 
 // Types
+// Relations
+export const usersRelations = relations(users, ({ many }) => ({
+  salesOrders: many(salesOrders),
+  financialTransactions: many(financialTransactions),
+}));
+
+export const customersRelations = relations(customers, ({ many }) => ({
+  salesOrders: many(salesOrders),
+  financialTransactions: many(financialTransactions),
+}));
+
+export const productsRelations = relations(products, ({ many }) => ({
+  salesOrderItems: many(salesOrderItems),
+}));
+
+export const salesOrdersRelations = relations(salesOrders, ({ one, many }) => ({
+  customer: one(customers, {
+    fields: [salesOrders.customerId],
+    references: [customers.id],
+  }),
+  vendedor: one(users, {
+    fields: [salesOrders.vendedorId],
+    references: [users.id],
+  }),
+  items: many(salesOrderItems),
+}));
+
+export const salesOrderItemsRelations = relations(salesOrderItems, ({ one }) => ({
+  salesOrder: one(salesOrders, {
+    fields: [salesOrderItems.orderId],
+    references: [salesOrders.id],
+  }),
+  product: one(products, {
+    fields: [salesOrderItems.productId],
+    references: [products.id],
+  }),
+}));
+
+export const financialTransactionsRelations = relations(financialTransactions, ({ one }) => ({
+  customer: one(customers, {
+    fields: [financialTransactions.customerId],
+    references: [customers.id],
+  }),
+  order: one(salesOrders, {
+    fields: [financialTransactions.orderId],
+    references: [salesOrders.id],
+  }),
+}));
+
 export type User = typeof users.$inferSelect;
 export type InsertUser = z.infer<typeof insertUserSchema>;
 
