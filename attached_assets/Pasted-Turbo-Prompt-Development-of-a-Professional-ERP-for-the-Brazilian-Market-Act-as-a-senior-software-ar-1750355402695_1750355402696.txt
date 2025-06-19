@@ -1,0 +1,109 @@
+Turbo Prompt: Development of a Professional ERP for the Brazilian Market
+Act as a senior software architect and systems engineer specialized in enterprise ERPs for the Brazilian market, with 20 years of experience designing robust, scalable systems that are fully compliant with Brazilian legal, tax, and operational requirements. You have led complex projects serving small businesses and large multinational corporations alike. Your focus is security, performance, usability, and full legal compliance.
+
+🎯 Objective:
+To develop USE WEB ERP, a fully functional, integrated, and intelligent corporate ERP software exclusively for the Brazilian market, using modern technologies and ensuring full compliance with national legislation. The entire system must be developed in Brazilian Portuguese (pt-BR), with currency in Brazilian Real (R$) and strict adherence to tax and legal standards such as NFe, SPED, and LGPD.
+
+🧩 ERP Development Steps
+1. System Architecture Planning
+Define the ideal architecture (modular monolith, microservices, or serverless).
+
+Justify your choice based on scalability, maintenance, and response time.
+
+Specify the overall database structure and how modules will interact.
+
+2. Development of Required Modules
+Each module must include data flows, main screens, and API interactions.
+
+🔹 Sales and CRM Module
+Lead, opportunity, and contract management.
+
+Automated commission calculation.
+
+Integration with TEF, PIX, and subscription platforms.
+
+🔹 POS (Point of Sale) Module
+Interface optimized for touch, mobile, and desktop.
+
+Support for NFC-e issuance and multi-cashier systems.
+
+Local receipt printing and QR Code payments.
+
+🔹 Inventory and Supply Management
+Multilevel and multi-store stock control.
+
+Expiration date and traceability tracking.
+
+AI-based inventory automation and smart restocking.
+
+Supplier integration through APIs.
+
+🔹 Financial and Treasury Module
+Predictive cash flow powered by AI.
+
+Bank reconciliation and PIX integration.
+
+Real-time reports and dashboards.
+
+🔹 Production and Industrial Management
+Production planning and order tracking (PCP).
+
+Material consumption, cost calculation, and productivity metrics.
+
+🔹 Fixed Assets Management
+Asset registration and automatic depreciation.
+
+Preventive and corrective maintenance controls.
+
+🔹 Billing and Tax Management
+Issuance of NFe, NFCe, CTe, and MDFe.
+
+Full integration with SEFAZ and Receita Federal.
+
+Tax calculations for ICMS, PIS, COFINS, ISS, IPI.
+
+Generation of SPED Fiscal and Contábil files.
+
+🔗 Integrations and Communication
+RESTful and GraphQL APIs for third-party connectivity.
+
+Integration with banks, marketplaces (Mercado Livre, Amazon, Shopify), and payment gateways.
+
+Business Intelligence architecture with customizable dashboards and real-time KPIs.
+
+⚙️ Technical Requirements
+Layer	Suggested Technologies
+Frontend	React, Angular, or Vue.js
+Backend	Node.js, .NET, or Java
+Database	PostgreSQL, MySQL, or SQL Server
+Authentication	OAuth 2.0, JWT, RBAC
+Security	AES encryption, LGPD compliant
+
+Note: All system components, interfaces, and documentation must be written in Brazilian Portuguese.
+
+🏆 Technical & Quality Highlights
+✅ Modern and intuitive UI/UX
+✅ AI-powered automation (finance, stock, production)
+✅ High performance and horizontal scalability
+✅ 100% Brazilian fiscal compliance
+✅ Full multilingual/multi-company support (with pt-BR as default)
+✅ Flexible deployment: SaaS or On-Premise
+
+📈 Expected Deliverables
+A full technical specification to guide a full-stack development team, including:
+
+API and system architecture documentation
+
+Database schema and data modeling
+
+Functional flowcharts and wireframes
+
+Full security and integration guidelines
+
+Use of Brazilian Portuguese in all layers
+
+📌 Contact – USE Sistemas
+📧 comercial@usesistemas.com.br
+📞 +55 (43) 99858-1400
+
+Take a deep breath and work on this problem step-by-step.
