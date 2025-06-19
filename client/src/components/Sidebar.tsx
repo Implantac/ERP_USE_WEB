@@ -9,7 +9,7 @@ import {
   UserCog, 
   Settings 
 } from "lucide-react";
-import useLogo from "@assets/USE_logo_1750358428721.png";
+// Logo will be loaded directly via public path
 
 const navigationItems = [
   {
@@ -73,7 +73,7 @@ export function Sidebar() {
         <div className="flex items-center space-x-3">
           <div className="w-10 h-10 flex items-center justify-center">
             <img 
-              src={useLogo} 
+              src="/attached_assets/USE_logo_1750358428721.png" 
               alt="USE Logo" 
               className="w-10 h-10 object-contain"
             />
