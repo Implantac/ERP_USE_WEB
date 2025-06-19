@@ -9,6 +9,7 @@ import {
   UserCog, 
   Settings 
 } from "lucide-react";
+import useLogo from "@assets/USE_logo_1750358428721.png";
 
 const navigationItems = [
   {
@@ -70,8 +71,12 @@ export function Sidebar() {
     <aside className="w-64 bg-sidebar text-sidebar-foreground flex-shrink-0 transition-all duration-300">
       <div className="p-6">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-sidebar-accent rounded-lg flex items-center justify-center">
-            <span className="text-sidebar-accent-foreground font-bold text-lg">U</span>
+          <div className="w-10 h-10 flex items-center justify-center">
+            <img 
+              src={useLogo} 
+              alt="USE Logo" 
+              className="w-10 h-10 object-contain"
+            />
           </div>
           <div>
             <h1 className="text-xl font-bold">USE WEB ERP</h1>
