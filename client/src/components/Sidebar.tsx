@@ -79,7 +79,7 @@ export function Sidebar() {
             />
           </div>
           <div>
-            <h1 className="text-xl font-bold">USE WEB ERP</h1>
+            <h1 className="text-xl font-bold">ERP USE WEB</h1>
             <p className="text-xs text-gray-300">Sistema Integrado</p>
           </div>
         </div>
