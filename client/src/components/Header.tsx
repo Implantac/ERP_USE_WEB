@@ -1,7 +1,17 @@
-import { Search, Bell } from "lucide-react";
+import { Search, Bell, LogOut } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useLocation } from "wouter";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface HeaderProps {
   title?: string;
@@ -9,6 +19,17 @@ interface HeaderProps {
 
 export function Header({ title = "Dashboard Principal" }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState("");
+  const { user, signOut } = useAuth();
+  const [, setLocation] = useLocation();
+
+  const handleSignOut = async () => {
+    await signOut();
+    setLocation('/login');
+  };
+
+  const userEmail = user?.email || '';
+  const userName = user?.user_metadata?.nome || userEmail.split('@')[0];
+  const userInitials = userName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
@@ -34,15 +55,27 @@ export function Header({ title = "Dashboard Principal" }: HeaderProps) {
             <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-destructive"></span>
           </Button>
 
-          <div className="flex items-center space-x-3">
-            <div className="text-right">
-              <p className="text-sm font-medium text-gray-700">Maria Silva</p>
-              <p className="text-xs text-gray-500">Administrador</p>
-            </div>
-            <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
-              <span className="text-white text-sm font-medium">MS</span>
-            </div>
-          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="flex items-center space-x-3 focus:outline-none hover:bg-gray-50 rounded-lg p-2 transition-colors">
+                <div className="text-right">
+                  <p className="text-sm font-medium text-gray-700">{userName}</p>
+                  <p className="text-xs text-gray-500">{userEmail}</p>
+                </div>
+                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-sm font-medium">{userInitials}</span>
+                </div>
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleSignOut}>
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Sair</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </header>
