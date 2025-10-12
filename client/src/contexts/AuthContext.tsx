@@ -47,12 +47,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         data: {
           nome,
         },
+        emailRedirectTo: undefined,
       },
     });
     if (error) throw error;
 
     if (data.user) {
-      await supabase.from('users').insert({
+      const { error: insertError } = await supabase.from('users').insert({
         id: data.user.id,
         username: email,
         nome,
@@ -60,6 +61,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         perfil: 'usuario',
         ativo: true,
       });
+
+      if (insertError && !insertError.message.includes('duplicate')) {
+        console.error('Error creating user profile:', insertError);
+      }
     }
   };
 

@@ -92,14 +92,14 @@ export function Sidebar() {
   const [location] = useLocation();
 
   return (
-    <aside className="w-64 bg-sidebar text-sidebar-foreground flex-shrink-0 transition-all duration-300">
-      <div className="p-6">
+    <aside className="w-64 bg-sidebar text-sidebar-foreground flex-shrink-0 transition-all duration-300 overflow-y-auto h-screen">
+      <div className="p-6 sticky top-0 bg-sidebar z-10">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 flex items-center justify-center">
-            <img 
-              src="/attached_assets/USE_logo_1750358428721.png" 
-              alt="USE Logo" 
-              className="w-10 h-10 object-contain"
+          <div className="w-10 h-10 flex items-center justify-center bg-white rounded-lg">
+            <img
+              src="/attached_assets/USE_logo_1750358428721.png"
+              alt="USE Logo"
+              className="w-8 h-8 object-contain"
             />
           </div>
           <div>
@@ -109,10 +109,10 @@ export function Sidebar() {
         </div>
       </div>
 
-      <nav className="mt-8">
-        {navigationItems.map((section) => (
-          <div key={section.title}>
-            <div className="px-6 mb-4">
+      <nav className="mt-2 pb-6">
+        {navigationItems.map((section, sectionIndex) => (
+          <div key={section.title} className={sectionIndex > 0 ? "mt-6" : ""}>
+            <div className="px-6 mb-3">
               <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
                 {section.title}
               </h3>
@@ -124,11 +124,11 @@ export function Sidebar() {
                   key={item.href}
                   href={item.href}
                   className={`flex items-center px-6 py-3 text-gray-200 hover:bg-sidebar-primary hover:text-white transition-all duration-200 ${
-                    isActive ? "bg-sidebar-primary border-r-4 border-sidebar-accent" : ""
+                    isActive ? "bg-sidebar-primary border-r-4 border-blue-400 text-white" : ""
                   }`}
                 >
-                  <item.icon className="w-5 h-5 mr-3" />
-                  {item.title}
+                  <item.icon className="w-5 h-5 mr-3 flex-shrink-0" />
+                  <span className="text-sm">{item.title}</span>
                 </Link>
               );
             })}

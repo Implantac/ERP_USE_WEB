@@ -31,17 +31,42 @@ export default function Login() {
         });
         setLocation('/');
       } else {
+        if (formData.password.length < 6) {
+          toast({
+            title: 'Senha inválida',
+            description: 'A senha deve ter pelo menos 6 caracteres.',
+            variant: 'destructive',
+          });
+          setLoading(false);
+          return;
+        }
+
         await signUp(formData.email, formData.password, formData.nome);
         toast({
           title: 'Conta criada!',
-          description: 'Sua conta foi criada com sucesso. Faça login para continuar.',
+          description: 'Sua conta foi criada com sucesso. Você já pode fazer login.',
         });
         setIsLogin(true);
+        setFormData({ ...formData, password: '' });
       }
     } catch (error: any) {
+      let errorMessage = 'Ocorreu um erro. Tente novamente.';
+
+      if (error.message.includes('Invalid login credentials')) {
+        errorMessage = 'Email ou senha incorretos.';
+      } else if (error.message.includes('Email not confirmed')) {
+        errorMessage = 'Por favor, confirme seu email antes de fazer login.';
+      } else if (error.message.includes('User already registered')) {
+        errorMessage = 'Este email já está cadastrado.';
+      } else if (error.message.includes('Password')) {
+        errorMessage = 'A senha deve ter pelo menos 6 caracteres.';
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+
       toast({
         title: 'Erro',
-        description: error.message || 'Ocorreu um erro. Tente novamente.',
+        description: errorMessage,
         variant: 'destructive',
       });
     } finally {

@@ -2,27 +2,42 @@ import { supabase, type User, type Customer, type Product, type SalesOrder, type
 
 export const storage = {
   async getDashboardMetrics() {
-    const [salesResult, ordersResult, productsResult, customersResult] = await Promise.all([
-      supabase.from('sales_orders').select('total').eq('status', 'pago'),
-      supabase.from('sales_orders').select('id, status').eq('status', 'pendente'),
-      supabase.from('products').select('id, estoque_atual, estoque_minimo').eq('ativo', true),
-      supabase.from('customers').select('id').eq('ativo', true)
-    ]);
+    try {
+      const [salesResult, ordersResult, productsResult, customersResult] = await Promise.all([
+        supabase.from('sales_orders').select('total').eq('status', 'pago'),
+        supabase.from('sales_orders').select('id, status').eq('status', 'pendente'),
+        supabase.from('products').select('id, estoque_atual, estoque_minimo').eq('ativo', true),
+        supabase.from('customers').select('id').eq('ativo', true)
+      ]);
 
-    const monthlySales = salesResult.data?.reduce((sum, order) => sum + parseFloat(order.total as any), 0) || 0;
-    const pendingOrders = ordersResult.data?.length || 0;
-    const productsInStock = productsResult.data?.length || 0;
-    const lowStockCount = productsResult.data?.filter(p => p.estoque_atual <= p.estoque_minimo).length || 0;
-    const activeCustomers = customersResult.data?.length || 0;
+      const monthlySales = salesResult.data?.reduce((sum, order) => {
+        const total = typeof order.total === 'string' ? parseFloat(order.total) : order.total;
+        return sum + (isNaN(total) ? 0 : total);
+      }, 0) || 0;
+      const pendingOrders = ordersResult.data?.length || 0;
+      const productsInStock = productsResult.data?.length || 0;
+      const lowStockCount = productsResult.data?.filter(p => (p.estoque_atual || 0) <= (p.estoque_minimo || 0)).length || 0;
+      const activeCustomers = customersResult.data?.length || 0;
 
-    return {
-      monthlySales,
-      pendingOrders,
-      productsInStock,
-      lowStockCount,
-      activeCustomers,
-      overdueCount: 0
-    };
+      return {
+        monthlySales,
+        pendingOrders,
+        productsInStock,
+        lowStockCount,
+        activeCustomers,
+        overdueCount: 0
+      };
+    } catch (error) {
+      console.error('Error getting dashboard metrics:', error);
+      return {
+        monthlySales: 0,
+        pendingOrders: 0,
+        productsInStock: 0,
+        lowStockCount: 0,
+        activeCustomers: 0,
+        overdueCount: 0
+      };
+    }
   },
 
   async getAllUsers() {
