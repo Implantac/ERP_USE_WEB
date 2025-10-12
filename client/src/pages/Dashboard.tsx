@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
+import { useLocation } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { 
-  TrendingUp, 
-  Clock, 
-  Package, 
+import {
+  TrendingUp,
+  Clock,
+  Package,
   Users as UsersIcon,
   ShoppingCart,
   UserPlus,
@@ -15,6 +16,8 @@ import {
 import { formatCurrency, formatDateTime } from "@/lib/formatters";
 
 export default function Dashboard() {
+  const [, setLocation] = useLocation();
+
   const { data: metrics, isLoading: metricsLoading } = useQuery({
     queryKey: ["/api/dashboard/metrics"],
   });
@@ -148,51 +151,55 @@ export default function Dashboard() {
             <CardTitle>Ações Rápidas</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <Button 
-              className="w-full flex items-center justify-between p-4 h-auto bg-accent/10 hover:bg-accent/20 text-gray-700 border-0" 
+            <Button
+              className="w-full flex items-center justify-between p-4 h-auto bg-blue-50 hover:bg-blue-100 text-gray-700 border-0"
               variant="outline"
+              onClick={() => setLocation('/sales')}
             >
               <div className="flex items-center">
-                <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center mr-3">
+                <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center mr-3">
                   <Plus className="w-4 h-4 text-white" />
                 </div>
                 <span className="font-medium">Nova Venda</span>
               </div>
             </Button>
 
-            <Button 
-              className="w-full flex items-center justify-between p-4 h-auto bg-success/10 hover:bg-success/20 text-gray-700 border-0" 
+            <Button
+              className="w-full flex items-center justify-between p-4 h-auto bg-green-50 hover:bg-green-100 text-gray-700 border-0"
               variant="outline"
+              onClick={() => setLocation('/crm')}
             >
               <div className="flex items-center">
-                <div className="w-8 h-8 bg-success rounded-lg flex items-center justify-center mr-3">
+                <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center mr-3">
                   <UserPlus className="w-4 h-4 text-white" />
                 </div>
                 <span className="font-medium">Novo Cliente</span>
               </div>
             </Button>
 
-            <Button 
-              className="w-full flex items-center justify-between p-4 h-auto bg-info/10 hover:bg-info/20 text-gray-700 border-0" 
+            <Button
+              className="w-full flex items-center justify-between p-4 h-auto bg-orange-50 hover:bg-orange-100 text-gray-700 border-0"
               variant="outline"
+              onClick={() => setLocation('/products')}
             >
               <div className="flex items-center">
-                <div className="w-8 h-8 bg-info rounded-lg flex items-center justify-center mr-3">
+                <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center mr-3">
                   <Package className="w-4 h-4 text-white" />
                 </div>
                 <span className="font-medium">Novo Produto</span>
               </div>
             </Button>
 
-            <Button 
-              className="w-full flex items-center justify-between p-4 h-auto bg-purple-100 hover:bg-purple-200 text-gray-700 border-0" 
+            <Button
+              className="w-full flex items-center justify-between p-4 h-auto bg-slate-100 hover:bg-slate-200 text-gray-700 border-0"
               variant="outline"
+              onClick={() => setLocation('/reports')}
             >
               <div className="flex items-center">
-                <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center mr-3">
+                <div className="w-8 h-8 bg-slate-600 rounded-lg flex items-center justify-center mr-3">
                   <FileText className="w-4 h-4 text-white" />
                 </div>
-                <span className="font-medium">Gerar Relatório</span>
+                <span className="font-medium">Ver Relatórios</span>
               </div>
             </Button>
           </CardContent>
