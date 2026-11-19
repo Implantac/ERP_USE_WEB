@@ -1,13 +1,19 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables');
+let client: SupabaseClient | null = null;
+
+if (supabaseUrl && supabaseAnonKey) {
+  client = createClient(supabaseUrl, supabaseAnonKey);
+} else {
+  console.warn('Supabase URL/anon key not configured — auth will be unavailable.');
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = client as SupabaseClient;
+
+export const isSupabaseConfigured = Boolean(client);
 
 export type Database = {
   public: {
@@ -193,7 +199,7 @@ export type Database = {
           quantidade?: number;
           preco_unitario?: number;
           desconto?: number;
-          total?: number;
+          total: number;
         };
       };
       financial_transactions: {
